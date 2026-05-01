@@ -1,0 +1,66 @@
+
+inventory = {
+    "laptop": {
+        "price": 999.99, "quantity": 15
+    },
+    "mouse": {
+        "price": 29.99, "quantity": 50
+    },
+    "keyboard": {
+        "price": 49.99, "quantity": 30
+    },
+    "mousepad": {
+        "price": 9.99, "quantity": 20
+        }, 
+}
+
+#Display inventory
+def display_inventory():
+    """Print all inventory in a formatted way."""
+    print("\n" + "=" * 30)
+    print("          Inventory")
+    print("=" * 30) 
+
+    if not inventory:
+        print("No inventory yet.")
+        return
+    for key, info in inventory.items():
+        print(f" {key.capitalize()}: {info['price']}, {info['quantity']}")
+        print("=" * 30)
+
+    print(f"\nTotal inventory: {len(inventory)}")
+    print("=" * 30)
+
+display_inventory()
+
+#look up inventory
+
+search = input("\nLook up an item in inventory: ").lower()
+
+inventoryy = inventory.get(search)
+
+if inventoryy:
+    print(f"\nFound: {search.capitalize()}")
+    print(f"\nPrice: {inventoryy['price']}, Quantity: {inventoryy['quantity']}")
+else: 
+    print(f"No inventory found for '{search}'.")
+
+# Let the user update the quantity of a product (simulating a sale or restock)
+
+lowstock_items = [item for item, info in inventory.items() if info["quantity"] < 10]
+
+
+
+
+
+print("\n--- Update Inventory ---")
+update_item = input("\nEnter the item you would like to change the quantity of: ")
+
+if update_item in inventory:
+    new_quantity = int(input("Enter the new quantity: "))
+    inventory[update_item]["quantity"] = new_quantity
+    print(f"Quantity for '{update_item}' updated to {new_quantity}")
+else:
+    print(f"Item '{update_item}' not found in inventory.")
+
+display_inventory()
